@@ -1,3 +1,83 @@
+*
+  box-sizing: border-box
+  user-select: none
+  -webkit-user-drag: none
+  -khtml-user-drag: none
+  -moz-user-drag: none
+  -o-user-drag: none
+  user-drag: none
+html, body, .memory, .memory__container, .memory__item--overlay
+  height: 100%
 body 
   margin: 0
-  user-select: none // autoprefix testing
+  color: #000000
+  background-color: #FEDA14
+  min-width: 450px
+.memory__container
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+  min-height: 1050px
+  padding: 30px
+.memory__button-container
+  position: relative
+  height: 60px
+  margin: 10px 0
+.memory--reset
+  font-size: 0.5em
+  width: 180px
+  height: 35px
+  color: #000000
+  background-color: #ffffff
+  border: none
+  border-radius: 6px
+  text-transform: uppercase
+  font-weight: 800
+  letter-spacing: 4px
+  outline: 0
+  cursor: pointer
+  &:hover
+    background-color: #cccccc
+.memory__wrapper
+  max-width: 1200px
+  margin: 0 auto
+  display: grid
+  grid-template-columns: 100px 100px 100px 
+  grid-template-rows: 100px 100px 100px 100px 100px 100px 100px 
+  grid-column-gap: 20px
+  grid-row-gap: 20px
+  justify-content: center
+.memory__item
+  position: relative
+  background-color: #ffffff
+  padding: 15px
+  border-radius: 10px
+  img
+    max-width: 100%
+    z-index: 1
+.memory__item--overlay
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  z-index: 10
+  img
+    height: 100%
+    width: 100%
+    border-radius: 10px
+    cursor: pointer
+@media (min-width:550px)
+  .memory__container
+    min-height: 750px
+  .memory__wrapper
+    grid-template-columns: 100px 100px 100px 100px 
+    grid-template-rows: 100px 100px 100px 100px 100px 100px
+
+@media (min-width:800px)
+  .memory__container
+    min-height: 550px
+  .memory__wrapper
+    grid-template-columns: 100px 100px 100px 100px 100px 100px
+    grid-template-rows: 100px 100px 100px 100px

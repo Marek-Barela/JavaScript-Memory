@@ -1,17 +1,30 @@
-import FruitImage from "./js/models/FruitsImages";
+import FruitImages from "./js/models/FruitImages";
 import imagesList from "./js/data/images";
-import { handleRenderMemoryImages } from "./js/views/memoryView";
+import DOMElements from './js/DOMSelectors';
+import { handleRenderMemoryImages, displayMemoryImage } from "./js/views/memoryView";
 import "./styles/style.sass";
 
-const state = {};
+const state = {
+  activeCards: []
+};
 
 const init = () => {
   imagesController()
 }
 
 const imagesController = () => {
-  state.fruitsImages = imagesList.map(image => new FruitImage(image));
-  handleRenderMemoryImages(state.fruitsImages);
+  state.fruitImages = new FruitImages(imagesList);
+  state.fruitImages.getOriginalMemoryList();
+  state.fruitImages.getClonedMemoryListToGetPairsOfImages();
+  state.fruitImages.mixClonedMemoryListOreder();
+  console.log(state.fruitImages)
+  handleRenderMemoryImages(state.fruitImages.clonedMemoryListToGetPairsOfImages);
 }
+
+DOMElements.memoryWrapper.addEventListener("click", (e) => {
+  if(!!e.target.dataset.image) {
+    displayMemoryImage(e.target.dataset.image, state.fruitImages.clonedMemoryListToGetPairsOfImages);
+  }
+})
 
 init();

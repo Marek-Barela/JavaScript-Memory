@@ -1,19 +1,18 @@
-import DOMElemets from "../DOMSelectors";
-import defaultImage from "../../images/hidden.png";
 import DOMElements from "../DOMSelectors";
+import defaultImage from "../../images/hidden.png";
 
-export const handleRenderMemoryImages = (images) => {
-  clearMemoryView()
-  renderMemoryImages(images)
-}
+export const handleRenderMemoryImages = images => {
+  clearMemoryView();
+  renderMemoryImages(images);
+};
 
-export const clearMemoryView = () => {
-  DOMElements.memoryWrapper.innerHTML = ""
-}
+const clearMemoryView = () => {
+  DOMElements.memoryWrapper.innerHTML = "";
+};
 
-export const renderMemoryImages = images => {
-  return images.forEach(image => memoryImage(image))
-}
+const renderMemoryImages = images => {
+  return images.forEach(image => memoryImage(image));
+};
 
 const memoryImage = imageData => {
   const { id, url, isVisible, isCopy = false, matched } = imageData;
@@ -21,10 +20,10 @@ const memoryImage = imageData => {
     <div class="memory__item">
       <img src=${url} alt="" />
       <div class="memory__item--overlay">
-        ${ isVisible ? "" : `<img src=${defaultImage} alt="" data-image=${id} data-copy=${isCopy} />` }
+        ${isVisible ? "" : `<img src=${defaultImage} alt="" data-image=${id} data-copy=${isCopy} />`}
       </div>
     </div>
   `;
 
-  DOMElemets.memoryWrapper.insertAdjacentHTML("beforeend", markup);
-}
+  DOMElements.memoryWrapper.insertAdjacentHTML("beforeend", markup);
+};

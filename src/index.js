@@ -22,6 +22,8 @@ DOMElements.memoryWrapper.addEventListener("click", e => {
   }
 });
 
+DOMElements.resetButton.addEventListener("click", imagesController)
+
 const selectFirstMemoryElement = (e) => {
   const { image, copy } = e.target.dataset;
   state.fruitImages.displayMemoryImage(image, copy);

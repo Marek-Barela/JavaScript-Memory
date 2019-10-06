@@ -3,6 +3,7 @@ import uuid from "uuid";
 class FruitImages {
   constructor(images) {
     this.images = images
+    
     this.originalMemoryList = []
     this.clonedMemoryListToGetPairsOfImages = []
   }
@@ -11,13 +12,20 @@ class FruitImages {
     this.originalMemoryList = this.images.map(image => {
       return {
         id: uuid(),
-        url: image
+        url: image,
+        isVisible: false,
+        isCopy: false 
       }
     })
   }
 
   getClonedMemoryListToGetPairsOfImages() {
-    this.clonedMemoryListToGetPairsOfImages = [...this.originalMemoryList, ...this.originalMemoryList];
+    const getCopyOfOriginal = this.originalMemoryList.map(item => { 
+      return { 
+        ...item, 
+        isCopy: true 
+    }})
+    this.clonedMemoryListToGetPairsOfImages = [...this.originalMemoryList, ...getCopyOfOriginal];
   }
 
   mixClonedMemoryListOreder() {

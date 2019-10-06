@@ -17,13 +17,13 @@ const imagesController = () => {
   state.fruitImages.getOriginalMemoryList();
   state.fruitImages.getClonedMemoryListToGetPairsOfImages();
   state.fruitImages.mixClonedMemoryListOreder();
-  console.log(state.fruitImages)
   handleRenderMemoryImages(state.fruitImages.clonedMemoryListToGetPairsOfImages);
 }
 
 DOMElements.memoryWrapper.addEventListener("click", (e) => {
   if(!!e.target.dataset.image) {
-    displayMemoryImage(e.target.dataset.image, state.fruitImages.clonedMemoryListToGetPairsOfImages);
+    const { image, copy } = e.target.dataset;
+    displayMemoryImage(image, copy, state.fruitImages.clonedMemoryListToGetPairsOfImages);
   }
 })
 

@@ -6,12 +6,12 @@ export const handleRenderMemoryImages = images => {
 }
 
 const memoryImage = imageData => {
-  const { id, url } = imageData;
+  const { id, url, isVisible, isCopy = false } = imageData;
   const markup = `
     <div class="memory__item">
       <img src=${url} alt="" />
       <div class="memory__item--overlay">
-        <img src=${defaultImage} alt="" data-image=${id} />
+        ${ isVisible ? "" : `<img src=${defaultImage} alt="" data-image=${id} data-copy=${isCopy} />` }
       </div>
     </div>
   `;
@@ -19,6 +19,8 @@ const memoryImage = imageData => {
   DOMElemets.memoryWrapper.insertAdjacentHTML("beforeend", markup);
 }
 
-export const displayMemoryImage = (id, images) => {
-  console.log({id, images})
+export const displayMemoryImage = (id, copy, images) => {
+  const filtredImage = images.filter(image => image.id === id);
+  const getCorrectImage = filtredImage.find(image => image.isCopy === Boolean(copy))
+  getCorrectImage.isVisible = true
 }

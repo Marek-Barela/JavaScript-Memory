@@ -1,7 +1,17 @@
 import DOMElemets from "../DOMSelectors";
 import defaultImage from "../../images/hidden.png";
+import DOMElements from "../DOMSelectors";
 
-export const handleRenderMemoryImages = images => {
+export const handleRenderMemoryImages = (images) => {
+  clearMemoryView()
+  renderMemoryImages(images)
+}
+
+const clearMemoryView = () => {
+  DOMElements.memoryWrapper.innerHTML = ""
+}
+
+const renderMemoryImages = images => {
   return images.forEach(image => memoryImage(image))
 }
 
@@ -21,6 +31,6 @@ const memoryImage = imageData => {
 
 export const displayMemoryImage = (id, copy, images) => {
   const filtredImage = images.filter(image => image.id === id);
-  const getCorrectImage = filtredImage.find(image => image.isCopy === Boolean(copy))
+  const getCorrectImage = filtredImage.find(image => image.isCopy === JSON.parse(copy))
   getCorrectImage.isVisible = true
 }

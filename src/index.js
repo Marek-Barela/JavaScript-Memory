@@ -24,6 +24,7 @@ DOMElements.memoryWrapper.addEventListener("click", (e) => {
   if(!!e.target.dataset.image) {
     const { image, copy } = e.target.dataset;
     displayMemoryImage(image, copy, state.fruitImages.clonedMemoryListToGetPairsOfImages);
+    handleRenderMemoryImages(state.fruitImages.clonedMemoryListToGetPairsOfImages);
   }
 })
 

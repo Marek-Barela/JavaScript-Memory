@@ -16,20 +16,26 @@ const imagesController = () => {
 
 DOMElements.memoryWrapper.addEventListener("click", e => {
   if (!!e.target.dataset.image && state.fruitImages.activeCards.length === 0) {
-    const { image, copy } = e.target.dataset;
-    state.fruitImages.displayMemoryImage(image, copy);
-    handleRenderMemoryImages(
-      state.fruitImages.clonedMemoryListToGetPairsOfImages
-    );
+    selectFirstMemoryElement(e);
   } else if (!!e.target.dataset.image) {
-    const { image, copy } = e.target.dataset;
-    state.fruitImages.displayMemoryImage(image, copy);
-    handleRenderMemoryImages(state.fruitImages.clonedMemoryListToGetPairsOfImages);
-    state.fruitImages.checkIfImagesMatch();
-    setTimeout(() => {
-      handleRenderMemoryImages(state.fruitImages.clonedMemoryListToGetPairsOfImages);
-    }, 600);
+    selectSecondMemoryElement(e);
   }
 });
+
+const selectFirstMemoryElement = (e) => {
+  const { image, copy } = e.target.dataset;
+  state.fruitImages.displayMemoryImage(image, copy);
+  handleRenderMemoryImages(state.fruitImages.clonedMemoryListToGetPairsOfImages);
+}
+
+const selectSecondMemoryElement = (e) => {
+  const { image, copy } = e.target.dataset;
+  state.fruitImages.displayMemoryImage(image, copy);
+  handleRenderMemoryImages(state.fruitImages.clonedMemoryListToGetPairsOfImages);
+  state.fruitImages.checkIfImagesMatch();
+  setTimeout(() => {
+    handleRenderMemoryImages(state.fruitImages.clonedMemoryListToGetPairsOfImages);
+  }, 600);
+}
 
 document.addEventListener("DOMContentLoaded", imagesController);

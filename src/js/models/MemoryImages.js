@@ -54,8 +54,7 @@ class MemoryImages {
   }
 
   checkIfImagesMatch() {
-    const checkIfImagesAreTheSame =
-      this.activeCards[0].id === this.activeCards[1].id;
+    const checkIfImagesAreTheSame = this.activeCards[0].id === this.activeCards[1].id;
     if (checkIfImagesAreTheSame) {
       this.activeCards.map(item => (item.matched = true));
       this.activeCards.length = 0;

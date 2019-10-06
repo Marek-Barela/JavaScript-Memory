@@ -1,11 +1,11 @@
 import uuid from "uuid";
 
-class FruitImages {
+class MemoryImages {
   constructor(images) {
     this.images = images
-    
     this.originalMemoryList = []
     this.clonedMemoryListToGetPairsOfImages = []
+    this.activeCards = []
   }
 
   getOriginalMemoryList() {
@@ -14,7 +14,8 @@ class FruitImages {
         id: uuid(),
         url: image,
         isVisible: false,
-        isCopy: false 
+        isCopy: false,
+        matched: false
       }
     })
   }
@@ -39,6 +40,24 @@ class FruitImages {
     }
     this.clonedMemoryListToGetPairsOfImages = newMixedArray;
   }
+
+  displayMemoryImage(id, copy) {
+    const filtredImage = this.clonedMemoryListToGetPairsOfImages.filter(image => image.id === id);
+    const getCorrectImage = filtredImage.find(image => image.isCopy === JSON.parse(copy));
+    getCorrectImage.isVisible = true
+    this.activeCards.push(getCorrectImage)
+  }
+
+  checkIfImagesMatch() {
+    const checkIfImagesAreTheSame = this.activeCards[0].id === this.activeCards[1].id;
+    if(checkIfImagesAreTheSame) {
+      this.activeCards.map(item => item.matched = true)
+      this.activeCards.length = 0
+    } else {
+      this.activeCards.length = 0
+      this.clonedMemoryListToGetPairsOfImages.map(item => item.isVisible = false)
+    }
+  }
 }
 
-export default FruitImages;
+export default MemoryImages;

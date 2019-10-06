@@ -1,19 +1,17 @@
-import FruitImages from "./js/models/FruitImages";
+import MemoryImages from "./js/models/MemoryImages";
 import imagesList from "./js/data/images";
 import DOMElements from './js/DOMSelectors';
-import { handleRenderMemoryImages, displayMemoryImage } from "./js/views/memoryView";
+import { handleRenderMemoryImages, renderMemoryImages, clearMemoryView } from "./js/views/memoryView";
 import "./styles/style.sass";
 
-const state = {
-  activeCards: []
-};
+const state = {};
 
 const init = () => {
   imagesController()
 }
 
 const imagesController = () => {
-  state.fruitImages = new FruitImages(imagesList);
+  state.fruitImages = new MemoryImages(imagesList);
   state.fruitImages.getOriginalMemoryList();
   state.fruitImages.getClonedMemoryListToGetPairsOfImages();
   state.fruitImages.mixClonedMemoryListOreder();
@@ -21,10 +19,19 @@ const imagesController = () => {
 }
 
 DOMElements.memoryWrapper.addEventListener("click", (e) => {
-  if(!!e.target.dataset.image) {
+  if(!!e.target.dataset.image && state.fruitImages.activeCards.length === 0) {
     const { image, copy } = e.target.dataset;
-    displayMemoryImage(image, copy, state.fruitImages.clonedMemoryListToGetPairsOfImages);
+    state.fruitImages.displayMemoryImage(image, copy);
     handleRenderMemoryImages(state.fruitImages.clonedMemoryListToGetPairsOfImages);
+  }
+  else if(!!e.target.dataset.image) {
+    const { image, copy } = e.target.dataset;
+    state.fruitImages.displayMemoryImage(image, copy);
+    handleRenderMemoryImages(state.fruitImages.clonedMemoryListToGetPairsOfImages);
+    state.fruitImages.checkIfImagesMatch();
+    setTimeout(() => {
+      handleRenderMemoryImages(state.fruitImages.clonedMemoryListToGetPairsOfImages);
+    }, 600)
   }
 })
 

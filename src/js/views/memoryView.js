@@ -7,17 +7,17 @@ export const handleRenderMemoryImages = (images) => {
   renderMemoryImages(images)
 }
 
-const clearMemoryView = () => {
+export const clearMemoryView = () => {
   DOMElements.memoryWrapper.innerHTML = ""
 }
 
-const renderMemoryImages = images => {
+export const renderMemoryImages = images => {
   return images.forEach(image => memoryImage(image))
 }
 
 const memoryImage = imageData => {
-  const { id, url, isVisible, isCopy = false } = imageData;
-  const markup = `
+  const { id, url, isVisible, isCopy = false, matched } = imageData;
+  const markup = matched ? `<div></div>` : `
     <div class="memory__item">
       <img src=${url} alt="" />
       <div class="memory__item--overlay">
@@ -27,10 +27,4 @@ const memoryImage = imageData => {
   `;
 
   DOMElemets.memoryWrapper.insertAdjacentHTML("beforeend", markup);
-}
-
-export const displayMemoryImage = (id, copy, images) => {
-  const filtredImage = images.filter(image => image.id === id);
-  const getCorrectImage = filtredImage.find(image => image.isCopy === JSON.parse(copy))
-  getCorrectImage.isVisible = true
 }

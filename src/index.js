@@ -37,7 +37,17 @@ const selectSecondMemoryElement = (e) => {
   state.fruitImages.checkIfImagesMatch();
   setTimeout(() => {
     handleRenderMemoryImages(state.fruitImages.clonedMemoryListToGetPairsOfImages);
+    testIfGameIsEnded()
   }, 600);
+}
+
+const testIfGameIsEnded = () => {
+  const isGameEnded = state.fruitImages.clonedMemoryListToGetPairsOfImages.every(element => { 
+    return element.matched === true
+  });
+  if(isGameEnded) { 
+    imagesController()
+  }
 }
 
 document.addEventListener("DOMContentLoaded", imagesController);

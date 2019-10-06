@@ -11,14 +11,14 @@ body
   display: flex
   align-items: center
   justify-content: center
-  min-height: 550px
-  padding: 30px 0
+  min-height: 1000px
+  padding: 30px
 .memory__wrapper
   max-width: 1200px
   margin: 0 auto
   display: grid
-  grid-template-columns: 100px 100px 100px 100px 100px 100px
-  grid-template-rows: 100px 100px 100px 100px
+  grid-template-columns: 100px 100px 100px 
+  grid-template-rows: 100px 100px 100px 100px 100px 100px 100px 
   grid-column-gap: 20px
   grid-row-gap: 20px
   justify-content: center
@@ -43,3 +43,17 @@ body
     opacity: 1
     transition: opacity 0.4s
     cursor: pointer
+
+@media (min-width:550px)
+  .memory__container
+    min-height: 750px
+  .memory__wrapper
+    grid-template-columns: 100px 100px 100px 100px 
+    grid-template-rows: 100px 100px 100px 100px 100px 100px
+
+@media (min-width:800px)
+  .memory__container
+    min-height: 550px
+  .memory__wrapper
+    grid-template-columns: 100px 100px 100px 100px 100px 100px
+    grid-template-rows: 100px 100px 100px 100px

@@ -2,8 +2,8 @@ import DOMElemets from "../DOMSelectors";
 import defaultImage from "../../images/hidden.png";
 
 export const handleRenderMemoryImages = images => {
-  const clonedArray = [...images, ...images];
-  const mixedArray = mixArrayOrder(clonedArray);
+  const cloneToGetPairsOfImages = [...images, ...images];
+  const mixedArray = mixArrayOrder(cloneToGetPairsOfImages);
   return mixedArray.forEach(image => memoryImage(image))
 }
 
@@ -22,12 +22,12 @@ const memoryImage = imageData => {
 }
 
 const mixArrayOrder = imagesArray => {
-  const mixedArray = [];
+  const newMixedArray = [];
   const arrLength = imagesArray.length;
   for(let i = 0; i < arrLength; i++) {
-    const position = Math.floor(Math.random() * imagesArray.length);
-    mixedArray.push(imagesArray[position])
-    imagesArray.splice(position, 1)
+    const randomPosition = Math.floor(Math.random() * imagesArray.length);
+    newMixedArray.push(imagesArray[randomPosition])
+    imagesArray.splice(randomPosition, 1)
   }
-  return mixedArray
+  return newMixedArray
 }
